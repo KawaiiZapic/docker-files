@@ -7,5 +7,3 @@ COPY --chown=nonroot ./bin/* /usr/local/bin/
 # run as non-privileged user
 USER nonroot
 
-# command / entrypoint of container
-ENTRYPOINT ["frpc"]
