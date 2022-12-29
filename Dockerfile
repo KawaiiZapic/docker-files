@@ -3,4 +3,7 @@ RUN docker-php-source extract && \
         apt update && \
         apt install libfreetype6-dev libjpeg62-turbo-dev libpng-dev -y && \
         docker-php-ext-configure gd --with-freetype --with-jpeg && \
-        docker-php-ext-install -j$(nproc) gd
+        docker-php-ext-install -j$(nproc) gd && \
+        docker-php-ext-enable gd opcache && \
+        a2enmod rewrite && \
+        docker-php-source delete
