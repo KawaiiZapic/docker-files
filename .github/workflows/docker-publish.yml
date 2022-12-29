@@ -7,7 +7,7 @@ name: Docker
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "frp" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
 
@@ -15,12 +15,11 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   # github.repository as <account>/<repo>
-  IMAGE_NAME: zapic-default/php
+  IMAGE_NAME: zapic-default/frp
 
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,16 +31,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      # Install the cosign tool except on PR
-      # https://github.com/sigstore/cosign-installer
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@f3c664df7af409cb4873aa5068053ba9d61a57b6 #v2.6.0
-        with:
-          cosign-release: 'v1.11.0'
-
-
+        
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
@@ -63,6 +53,13 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Download and Extract Frp
+        id: download
+        run: |
+          curl https://github.com/fatedier/frp/releases/download/v0.46.0/frp_0.46.0_linux_amd64.tar.gz | tar -zx
+          mkdir bin
+          mv frp_0.46.0_linux_amd64/frps bin/
+          mv frp_0.46.0_linux_amd64/frpc bin/
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
