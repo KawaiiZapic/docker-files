@@ -15,7 +15,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   # github.repository as <account>/<repo>
-  IMAGE_NAME: zapic233/php
+  IMAGE_NAME: zapic-default/php
 
 
 jobs:
