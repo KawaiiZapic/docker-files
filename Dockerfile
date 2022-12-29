@@ -1,9 +1,11 @@
-FROM php:7.4-apache
-RUN docker-php-source extract && \
-        apt update && \
-        apt install libfreetype6-dev libjpeg62-turbo-dev libpng-dev -y && \
-        docker-php-ext-configure gd --with-freetype --with-jpeg && \
-        docker-php-ext-install -j$(nproc) gd && \
-        docker-php-ext-enable gd opcache && \
-        a2enmod rewrite && \
-        docker-php-source delete
+# use a distroless base image with glibc
+FROM gcr.io/distroless/base-debian11:nonroot
+
+# copy our compiled binary
+COPY --chown=frp ./bin/frps /usr/local/bin/
+
+# run as non-privileged user
+USER frp
+
+# command / entrypoint of container
+ENTRYPOINT ["frpc", "--version"]
