@@ -8,4 +8,4 @@ COPY --chown=nonroot ./bin/* /usr/local/bin/
 USER nonroot
 
 # command / entrypoint of container
-ENTRYPOINT ["frpc", "--version"]
+ENTRYPOINT ["frpc"]
