@@ -5,5 +5,5 @@ RUN docker-php-source extract && \
         docker-php-ext-configure gd --with-freetype --with-jpeg && \
         docker-php-ext-install -j$(nproc) gd && \
         docker-php-ext-enable gd opcache && \
-        a2enmod rewrite proxy && \
+        a2enmod rewrite proxy proxy_http && \
         docker-php-source delete
