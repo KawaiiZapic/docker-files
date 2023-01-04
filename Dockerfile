@@ -6,4 +6,5 @@ RUN docker-php-source extract && \
         docker-php-ext-install -j$(nproc) gd && \
         docker-php-ext-enable gd opcache && \
         a2enmod rewrite proxy proxy_http && \
-        docker-php-source delete
+        docker-php-source delete && \
+        mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
