@@ -1,5 +1,4 @@
 name: build frp docker image
-
 on:
   push:
     branches: [ frp ]
