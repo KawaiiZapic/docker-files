@@ -1,5 +1,9 @@
 name: Template workflow file
 
+on:
+  push:
+    branches: [ "template" ]
+
 env:
   IMAGE_NAME: example
   IMAGE_VERSION: latest
