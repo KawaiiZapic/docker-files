@@ -5,8 +5,8 @@ on:
     branches: [ "7.4-apache" ]
 
 env:
-  REGISTRY: registry.cn-hangzhou.aliyuncs.com
-  IMAGE_NAME: zapic-default/php
+  IMAGE_NAME: php
+  IMAGE_VERSION: 7.4-apache
   
 jobs:
   build:
@@ -19,14 +19,14 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ secrets.ALIYUN_REGISTRY }}
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_PASSWORD }}
 
-      - name: Build and push ${{ env.IMAGE_NAME }}:7.4-apache
+      - name: Build and push ${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:7.4-apache
+          tags: ${{ secrets.ALIYUN_REGISTRY }}/${{ secret.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
