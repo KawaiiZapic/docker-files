@@ -2,7 +2,7 @@ name: build php:7.4-apache docker image
 
 on:
   push:
-    branches: [ "7.4-apache" ]
+    branches: [ "php-7.4-apache" ]
 
 env:
   IMAGE_NAME: php
@@ -29,4 +29,6 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
+          tags: |
+            ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
+            ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
