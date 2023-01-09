@@ -36,4 +36,4 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secret.ALIYUN_REGISTRY }}/${{ secret.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.FRP_VERSION }}
+          tags: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.FRP_VERSION }}
