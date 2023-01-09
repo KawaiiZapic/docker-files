@@ -1,8 +1,12 @@
-name: Template workflow file
+name: build php:7.4-apache docker image
+
+on:
+  push:
+    branches: [ "7.4-apache" ]
 
 env:
-  IMAGE_NAME: example
-  IMAGE_VERSION: latest
+  IMAGE_NAME: php
+  IMAGE_VERSION: 7.4-apache
   
 jobs:
   build:
@@ -25,4 +29,4 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secret.ALIYUN_REGISTRY }}/${{ secret.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.FRP_VERSION }}
+          tags: ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
