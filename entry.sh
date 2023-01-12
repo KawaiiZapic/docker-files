@@ -4,12 +4,12 @@ if [ ! $AGREE_TOS ]; then
     exit 1
 fi
 
-echo <<EOF
+cat <<EOF > ~/.cloudflare
 dns_cloudflare_email = $EMAIL
 dns_cloudflare_api_key = $CLOUDFLARE_TOKEN
-EOF > ~/.cloudflare
+EOF
 
-chmod 400 ~/.cloudfalre
+chmod 400 ~/.cloudflare
 
 certbot certonly \
     --non-interactive --agree-tos --email $EMAIL \
