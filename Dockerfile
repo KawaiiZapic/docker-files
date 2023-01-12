@@ -6,7 +6,7 @@ RUN docker-php-source extract && \
         docker-php-ext-configure mysqli && \
         docker-php-ext-install -j$(nproc) gd && \
         docker-php-ext-install -j$(nproc) mysqli && \
-        pecl install redis && \
+        MAKEFLAGS="-j $(nproc)" pecl install redis && \
         docker-php-ext-enable gd opcache redis mysqli && \
         a2enmod rewrite proxy proxy_http && \
         docker-php-source delete && \
