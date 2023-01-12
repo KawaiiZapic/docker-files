@@ -1,11 +1,11 @@
-name: Template workflow file
+name: Certbot with cloudflare 
 
 on:
   push:
-    branches: [ "template" ]
+    branches: [ "certbot-cloudflare" ]
 
 env:
-  IMAGE_NAME: example
+  IMAGE_NAME: certbot-cloudflare
   IMAGE_VERSION: latest
   
 jobs:

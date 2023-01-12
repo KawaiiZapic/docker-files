@@ -1,9 +1,11 @@
-FROM php:7.4-apache
-RUN docker-php-source extract && \
-        apt update && \
-        apt install libfreetype6-dev libjpeg62-turbo-dev libpng-dev -y && \
-        docker-php-ext-configure gd --with-freetype --with-jpeg && \
-        docker-php-ext-install -j$(nproc) gd && \
-        docker-php-ext-enable gd opcache && \
-        a2enmod rewrite && \
-        docker-php-source delete
+FROM alpine:3.17
+
+COPY entry.sh /entry.sh
+
+RUN apk update &&\
+        apk add python3 py3-pip curl && \
+        wget -o /usr/local/bin "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+        chmod +x /usr/local/bin/kubectl && \
+        chmod +x /entry.sh
+
+ENTRYPOINT ["/entry.sh"]
