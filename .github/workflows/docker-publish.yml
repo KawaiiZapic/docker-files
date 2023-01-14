@@ -1,12 +1,12 @@
-name: build php:7.4-fpm-alpine docker image
+name: build php:7.4-nginx-alpine docker image
 
 on:
   push:
-    branches: [ "php-7.4-fpm-alpine" ]
+    branches: [ "php-7.4-nginx-alpine" ]
 
 env:
   IMAGE_NAME: php
-  IMAGE_VERSION: 7.4-fpm-alpine
+  IMAGE_VERSION: 7.4-nginx-alpine
   
 jobs:
   build:
