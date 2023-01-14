@@ -31,6 +31,7 @@ RUN     docker-php-source extract && \
         docker-php-source delete && \
         apk del autoconf build-base freetype-dev libjpeg-turbo-dev libpng-dev --purge && \
         mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+        touch /etc/nginx/vhost_extra_config && \
         chmod +x /entrypoint.sh && \
         rm /usr/local/etc/php-fpm.d/*
         
