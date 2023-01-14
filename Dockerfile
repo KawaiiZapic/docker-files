@@ -3,7 +3,7 @@ RUN docker-php-source extract && \
         apk update && \
         apk add --no-cache autoconf build-base && \
         MAKEFLAGS="-j $(nproc)" pecl install redis && \
-        apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev && \
+        apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev freetype libjpeg-turbo libpng && \
         docker-php-ext-configure gd --with-freetype --with-jpeg && \
         docker-php-ext-configure mysqli && \
         docker-php-ext-install -j$(nproc) gd && \
