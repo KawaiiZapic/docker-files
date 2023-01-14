@@ -6,6 +6,7 @@ RUN docker-php-source extract && \
         docker-php-ext-configure mysqli && \
         docker-php-ext-install -j$(nproc) gd && \
         docker-php-ext-install -j$(nproc) mysqli && \
+        apk add autoconf gcc && \
         MAKEFLAGS="-j $(nproc)" pecl install redis && \
         docker-php-ext-enable gd opcache redis mysqli && \
         docker-php-source delete && \
