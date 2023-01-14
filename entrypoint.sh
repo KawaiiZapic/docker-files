@@ -1,4 +1,4 @@
 #!/bin/sh
-(nginx -g 'daemon off;' && kill "$$") &
+(nginx && kill "$$") &
 (php-fpm && kill "$$") &
 wait
