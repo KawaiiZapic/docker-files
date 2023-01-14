@@ -1,7 +1,7 @@
 FROM php:7.4-fpm-alpine
 RUN docker-php-source extract && \
         apk update && \
-        apk add autoconf gcc && \
+        apk add autoconf build-base && \
         MAKEFLAGS="-j $(nproc)" pecl install redis && \
         apk add freetype-dev libjpeg-turbo-dev libpng-dev && \
         docker-php-ext-configure gd --with-freetype --with-jpeg && \
