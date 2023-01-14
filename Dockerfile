@@ -29,5 +29,8 @@ RUN     docker-php-source extract && \
         apk del autoconf build-base freetype-dev libjpeg-turbo-dev libpng-dev --purge && \
         mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
         chmod +x /entrypoint.sh
+        
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 
 ENTRYPOINT ["/entrypoint.sh"]
