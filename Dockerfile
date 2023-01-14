@@ -13,7 +13,10 @@ RUN     apk add --no-cache openssl curl ca-certificates && \
         openssl rsa -pubin -in /tmp/nginx_signing.rsa.pub -text -noout && \
         mv /tmp/nginx_signing.rsa.pub /etc/apk/keys/ && \
         apk del openssl curl ca-certificates --purge && \
-        apk add --no-cache nginx@nginx 
+        apk add --no-cache nginx@nginx && \
+        sed -i 's/user  nginx/daemon  off;\nuser  www-data/g' /etc/nginx/nginx.conf && \
+        ln -s /dev/stdout /var/log/nginx/access.log && \
+        ln -s /dev/stdout /var/log/nginx/error.log
 
 RUN     docker-php-source extract && \
         apk update && \
